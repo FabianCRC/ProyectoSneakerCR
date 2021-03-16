@@ -18,7 +18,14 @@ namespace Solution.API.Mapping
             CreateMap<data.Productos, DataModels.Productos>().ReverseMap();
             CreateMap<data.Roles, DataModels.Roles>().ReverseMap();
             CreateMap<data.TelefonoTienda, DataModels.TelefonoTienda>().ReverseMap();
+            CreateMap<data.Tiendas, DataModels.Tiendas>().ReverseMap();
+            CreateMap<data.UbicacionTienda, DataModels.UbicacionTienda>().ReverseMap();
+            CreateMap<data.Usuarios, DataModels.Usuarios>().ReverseMap();
+            CreateMap<data.UsuarioTienda, DataModels.UsuarioTienda>().ReverseMap();
+            CreateMap<data.ValoracionTienda, DataModels.ValoracionTienda>().ReverseMap();
+
 
 
         }
     }
+}
