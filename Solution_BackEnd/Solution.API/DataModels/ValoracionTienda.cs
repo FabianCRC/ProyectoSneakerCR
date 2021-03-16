@@ -13,7 +13,7 @@ namespace Solution.API.DataModels
         public decimal IdUsuario { get; set; }
         public decimal IdTienda { get; set; }
 
-        public virtual Tiendas IdTiendaNavigation { get; set; }
-        public virtual Usuarios IdUsuarioNavigation { get; set; }
+        public virtual Tiendas Tienda { get; set; }
+        public virtual Usuarios Usuario { get; set; }
     }
 }

@@ -305,13 +305,13 @@ namespace Solution.DAL.EF
                     .HasColumnName("id_usuario")
                     .HasColumnType("numeric(18, 0)");
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tienda)
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__usuario_t__id_ti__412EB0B6");
 
-                entity.HasOne(d => d.IdUsuarioNavigation)
+                entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -352,11 +352,10 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdRolNavigation)
+                entity.HasOne(d => d.Rol)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdRol)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__usuarios__id_rol__36B12243");
+                    .HasConstraintName("FK_dbo.Roles_dbo.Usuarios_IdRol");
             });
 
             modelBuilder.Entity<ValoracionTienda>(entity =>
@@ -389,13 +388,13 @@ namespace Solution.DAL.EF
                     .HasColumnName("valoracion")
                     .HasColumnType("numeric(3, 1)");
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tienda)
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__valoracio__id_ti__3A81B327");
 
-                entity.HasOne(d => d.IdUsuarioNavigation)
+                entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)

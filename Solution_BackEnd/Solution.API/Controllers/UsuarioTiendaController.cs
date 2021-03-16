@@ -31,7 +31,7 @@ namespace Solution.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodels.UsuarioTienda>>> GetUsuarioTienda()
         {
-            var aux = new Solution.BS.UsuarioTienda(_context).GetAll();
+            var aux = await new Solution.BS.UsuarioTienda(_context).GetAllWithAsync();
 
             var mapaux = _mapper.Map<IEnumerable<data.UsuarioTienda>, IEnumerable<datamodels.UsuarioTienda>>(aux).ToList();
             return mapaux;
@@ -42,7 +42,7 @@ namespace Solution.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<datamodels.UsuarioTienda>> GetUsuarioTienda(int id)
         {
-            var usuariotienda = new Solution.BS.UsuarioTienda(_context).GetOneById(id);
+            var usuariotienda = await new Solution.BS.UsuarioTienda(_context).GetOneByIdWithAsync(id);
 
             if (usuariotienda == null)
             {

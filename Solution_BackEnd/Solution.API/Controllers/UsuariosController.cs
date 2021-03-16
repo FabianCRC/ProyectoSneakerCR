@@ -30,7 +30,7 @@ namespace Solution.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodels.Usuarios>>> GetUsuarios()
         {
-            var aux = new Solution.BS.Usuarios(_context).GetAll();
+            var aux = await new Solution.BS.Usuarios(_context).GetAllWithAsync();
 
             var mapaux = _mapper.Map<IEnumerable<data.Usuarios>, IEnumerable<datamodels.Usuarios>>(aux).ToList();
             return mapaux;
@@ -41,7 +41,7 @@ namespace Solution.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<datamodels.Usuarios>> GetUsuarios(int id)
         {
-            var usuarios = new Solution.BS.Usuarios(_context).GetOneById(id);
+            var usuarios = await new Solution.BS.Usuarios(_context).GetOneByIdWithAsync(id);
 
             if (usuarios == null)
             {

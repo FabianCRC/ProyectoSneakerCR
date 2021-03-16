@@ -19,16 +19,16 @@ namespace Solution.DAL.Repository
         public async Task<IEnumerable<data.ValoracionTienda>> GetAllWithAsAsync()
         {
             return await _db.ValoracionTienda
-                .Include(m => m.IdUsuario)
-                .Include(m => m.IdTienda)
+                .Include(m => m.Usuario)
+                .Include(m => m.Tienda)
                 .ToListAsync();
         }
 
         public async Task<data.ValoracionTienda> GetOneByIdWithAsync(int id)
         {
             return await _db.ValoracionTienda
-              .Include(m => m.IdUsuario)
-                .Include(m => m.IdTienda)
+              .Include(m => m.Usuario)
+                .Include(m => m.Tienda)
              .SingleOrDefaultAsync(m => m.IdTienda == id);
         }
 

@@ -31,7 +31,7 @@ namespace Solution.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodels.ValoracionTienda>>> GetValoracionTienda()
         {
-            var aux = new Solution.BS.ValoracionTienda(_context).GetAll();
+            var aux = await new Solution.BS.ValoracionTienda(_context).GetAllWithAsync();
 
             var mapaux = _mapper.Map<IEnumerable<data.ValoracionTienda>, IEnumerable<datamodels.ValoracionTienda>>(aux).ToList();
             return mapaux;
@@ -42,7 +42,7 @@ namespace Solution.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<datamodels.ValoracionTienda>> GetValoracionTienda(int id)
         {
-            var valoraciontienda = new Solution.BS.ValoracionTienda(_context).GetOneById(id);
+            var valoraciontienda = await new Solution.BS.ValoracionTienda(_context).GetOneByIdWithAsync(id);
 
             if (valoraciontienda == null)
             {

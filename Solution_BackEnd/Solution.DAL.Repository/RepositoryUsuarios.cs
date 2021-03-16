@@ -20,15 +20,15 @@ namespace Solution.DAL.Repository
         public async Task<IEnumerable<data.Usuarios>> GetAllWithAsAsync()
         {
             return await _db.Usuarios
-                .Include(m => m.IdRol)
+                .Include(m => m.Rol)
                 .ToListAsync();
         }
 
         public async Task<data.Usuarios> GetOneByIdWithAsync(int id)
         {
             return await _db.Usuarios
-             .Include(m => m.IdRol)
-             .SingleOrDefaultAsync(m => m.IdUsuario == id);
+             .Include(m => m.Rol)
+             .SingleOrDefaultAsync(m => m.IdRol == id);
         }
 
 
