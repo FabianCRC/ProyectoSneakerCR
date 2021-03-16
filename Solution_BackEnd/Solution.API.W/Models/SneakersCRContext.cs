@@ -1,19 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Solution.DO.Objects;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Solution.DAL.EF
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
+
+namespace Solution.API.W.Models
 {
-    public partial class SolutionDbContext : DbContext
+    public partial class SneakersCRContext : DbContext
     {
-        public SolutionDbContext(DbContextOptions<SolutionDbContext> options) : base(options)
+        public SneakersCRContext()
         {
-
         }
 
-        //DBSet van aqui
+        public SneakersCRContext(DbContextOptions<SneakersCRContext> options)
+            : base(options)
+        {
+        }
+
         public virtual DbSet<CategoriaProductos> CategoriaProductos { get; set; }
         public virtual DbSet<CorreoTienda> CorreoTienda { get; set; }
         public virtual DbSet<MarcaProductos> MarcaProductos { get; set; }
@@ -26,10 +31,17 @@ namespace Solution.DAL.EF
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<ValoracionTienda> ValoracionTienda { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=LAPTOP-NTJ8C71K;Database=SneakersCR;Trusted_Connection=True;");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //model builder va aqui
             modelBuilder.Entity<CategoriaProductos>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
@@ -401,10 +413,10 @@ namespace Solution.DAL.EF
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__valoracio__id_us__398D8EEE");
             });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
     }
 }
