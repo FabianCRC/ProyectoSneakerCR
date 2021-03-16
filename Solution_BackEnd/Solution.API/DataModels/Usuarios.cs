@@ -19,7 +19,8 @@ namespace Solution.API.DataModels
         public string Contrasena { get; set; }
         public decimal IdRol { get; set; }
 
-        //public virtual Roles IdRolNavigation { get; set; }
+        public virtual Roles IdRolNavigation { get; set; }
+
         //public virtual ICollection<UsuarioTienda> UsuarioTienda { get; set; }
         //public virtual ICollection<ValoracionTienda> ValoracionTienda { get; set; }
     }
