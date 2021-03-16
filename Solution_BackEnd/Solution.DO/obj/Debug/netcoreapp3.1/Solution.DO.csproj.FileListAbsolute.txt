@@ -1,0 +1,9 @@
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.deps.json
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.dll
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.pdb
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.AssemblyInfoInputs.cache
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.AssemblyInfo.cs
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.csproj.CoreCompileInputs.cache
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.dll
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.pdb
+C:\Users\Fabian\Documents\GitHub\ProyectoSneakersCR\Solution_BackEnd\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.csprojAssemblyReference.cache
