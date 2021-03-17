@@ -15,8 +15,8 @@ namespace Solution.DO.Objects
         public decimal IdTienda { get; set; }
         public decimal IdCategoria { get; set; }
 
-        public virtual CategoriaProductos IdCategoriaNavigation { get; set; }
-        public virtual MarcaProductos IdMarcaProductoNavigation { get; set; }
-        public virtual Tiendas IdTiendaNavigation { get; set; }
+        public virtual CategoriaProductos CategoriaProductos { get; set; }
+        public virtual MarcaProductos MarcaProductos { get; set; }
+        public virtual Tiendas Tiendas { get; set; }
     }
 }

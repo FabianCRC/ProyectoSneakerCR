@@ -147,19 +147,19 @@ namespace Solution.DAL.EF
                     .HasColumnName("valor")
                     .HasColumnType("decimal(10, 2)");
 
-                entity.HasOne(d => d.IdCategoriaNavigation)
+                entity.HasOne(d => d.CategoriaProductos)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdCategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__productos__id_ca__2C3393D0");
 
-                entity.HasOne(d => d.IdMarcaProductoNavigation)
+                entity.HasOne(d => d.MarcaProductos)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdMarcaProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__productos__id_ma__2B3F6F97");
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -212,7 +212,7 @@ namespace Solution.DAL.EF
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.TelefonoTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
