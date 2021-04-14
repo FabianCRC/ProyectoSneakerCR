@@ -12,6 +12,6 @@ namespace Solution.DO.Objects
         public string Direccion { get; set; }
         public decimal IdTienda { get; set; }
 
-        public virtual Tiendas IdTiendaNavigation { get; set; }
+        public virtual Tiendas Tiendas { get; set; }
     }
 }

@@ -77,7 +77,7 @@ namespace Solution.DAL.EF
                     .HasColumnName("id_tienda")
                     .HasColumnType("numeric(18, 0)");
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.CorreoTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -278,7 +278,7 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.UbicacionTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
