@@ -113,7 +113,7 @@ namespace Solution.API.Controllers
 
         private bool ProductosExists(int id)
         {
-            return (new Solution.BS.Usuarios(_context).GetOneById(id) != null);
+            return (new Solution.BS.AspNetUsers(_context).GetOneById(id) != null);
         }
 
     }

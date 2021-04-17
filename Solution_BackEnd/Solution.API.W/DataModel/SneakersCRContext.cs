@@ -192,7 +192,7 @@ namespace Solution.API.W.DataModel
                     .HasColumnName("id_tienda")
                     .HasColumnType("numeric(18, 0)");
 
-                entity.HasOne(d => d.IdTiendaNavigation)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.CorreoTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)

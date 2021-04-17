@@ -9,7 +9,7 @@ namespace Solution.DO.Objects
         public decimal IdValoracion { get; set; }
         public decimal Valoracion { get; set; }
         public string Comentario { get; set; }
-        public decimal IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public decimal IdTienda { get; set; }
 
         public virtual Tiendas Tienda { get; set; }

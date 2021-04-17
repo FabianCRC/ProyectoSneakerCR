@@ -112,7 +112,7 @@ namespace Solution.API.Controllers
 
         private bool MarcaProductosExists(int id)
         {
-            return (new Solution.BS.Roles(_context).GetOneById(id) != null);
+            return (new Solution.BS.MarcaProductos(_context).GetOneById(id) != null);
         }
 
     }

@@ -14,6 +14,7 @@ namespace Solution.DAL.EF
         }
 
         //DBSet van aqui
+
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -33,8 +34,6 @@ namespace Solution.DAL.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //model builder va aqui
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId);
@@ -447,9 +446,9 @@ namespace Solution.DAL.EF
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__valoracio__id_us__08B54D69");
             });
+
             OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
     }

@@ -59,7 +59,7 @@ namespace Solution.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuarioTienda(int id, datamodels.UsuarioTienda usuariotienda)
         {
-            if (id != usuariotienda.IdUsuario)
+            if (!id.Equals(usuariotienda.IdUsuario))
             {
                 return BadRequest();
             }

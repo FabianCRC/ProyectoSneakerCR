@@ -7,7 +7,7 @@ namespace Solution.DO.Objects
    public class UsuarioTienda
     {
         public decimal IdUsuarioTienda { get; set; }
-        public decimal IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public decimal IdTienda { get; set; }
 
         public virtual Tiendas Tiendas { get; set; }
