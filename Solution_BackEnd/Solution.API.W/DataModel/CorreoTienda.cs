@@ -14,6 +14,6 @@ namespace Solution.API.W.DataModel
         public string Descripcion { get; set; }
         public decimal IdTienda { get; set; }
 
-        public virtual Tiendas IdTiendaNavigation { get; set; }
+        public virtual Tiendas Tiendas { get; set; }
     }
 }

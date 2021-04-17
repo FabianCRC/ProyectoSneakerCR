@@ -14,22 +14,125 @@ namespace Solution.DAL.EF
         }
 
         //DBSet van aqui
+        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CategoriaProductos> CategoriaProductos { get; set; }
         public virtual DbSet<CorreoTienda> CorreoTienda { get; set; }
         public virtual DbSet<MarcaProductos> MarcaProductos { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<TelefonoTienda> TelefonoTienda { get; set; }
         public virtual DbSet<Tiendas> Tiendas { get; set; }
         public virtual DbSet<UbicacionTienda> UbicacionTienda { get; set; }
         public virtual DbSet<UsuarioTienda> UsuarioTienda { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<ValoracionTienda> ValoracionTienda { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             //model builder va aqui
+            modelBuilder.Entity<AspNetRoleClaims>(entity =>
+            {
+                entity.HasIndex(e => e.RoleId);
+
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetRoleClaims)
+                    .HasForeignKey(d => d.RoleId);
+            });
+
+            modelBuilder.Entity<AspNetRoles>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedName)
+                    .HasName("RoleNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedName] IS NOT NULL)");
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<AspNetUserClaims>(entity =>
+            {
+                entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserClaims)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+                entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserLogins)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserRoles>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId });
+
+                entity.HasIndex(e => e.RoleId);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.RoleId);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserTokens>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.Name).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserTokens)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUsers>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedEmail)
+                    .HasName("EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName)
+                    .HasName("UserNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
             modelBuilder.Entity<CategoriaProductos>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
@@ -166,24 +269,6 @@ namespace Solution.DAL.EF
                     .HasConstraintName("FK__productos__id_ti__2A4B4B5E");
             });
 
-            modelBuilder.Entity<Roles>(entity =>
-            {
-                entity.HasKey(e => e.IdRol)
-                    .HasName("PK__roles__6ABCB5E061D68A15");
-
-                entity.ToTable("roles");
-
-                entity.Property(e => e.IdRol)
-                    .HasColumnName("id_rol")
-                    .HasColumnType("numeric(18, 0)");
-
-                entity.Property(e => e.DescripcionRol)
-                    .IsRequired()
-                    .HasColumnName("descripcion_rol")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<TelefonoTienda>(entity =>
             {
                 entity.HasKey(e => e.IdTelefono)
@@ -288,7 +373,7 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<UsuarioTienda>(entity =>
             {
                 entity.HasKey(e => e.IdUsuarioTienda)
-                    .HasName("PK__usuario___12CDCE69B98F2C9C");
+                    .HasName("PK__usuario___12CDCE69A394A8E4");
 
                 entity.ToTable("usuario_tienda");
 
@@ -302,66 +387,27 @@ namespace Solution.DAL.EF
                     .HasColumnType("numeric(18, 0)");
 
                 entity.Property(e => e.IdUsuario)
+                    .IsRequired()
                     .HasColumnName("id_usuario")
-                    .HasColumnType("numeric(18, 0)");
+                    .HasMaxLength(450);
 
-                entity.HasOne(d => d.Tienda)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__usuario_t__id_ti__412EB0B6");
+                    .HasConstraintName("FK__usuario_t__id_ti__0D7A0286");
 
-                entity.HasOne(d => d.Usuario)
+                entity.HasOne(d => d.Usuarios)
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__usuario_t__id_us__403A8C7D");
-            });
-
-            modelBuilder.Entity<Usuarios>(entity =>
-            {
-                entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__usuarios__4E3E04AD3FD4CC8F");
-
-                entity.ToTable("usuarios");
-
-                entity.Property(e => e.IdUsuario)
-                    .HasColumnName("id_usuario")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.Contrasena)
-                    .IsRequired()
-                    .HasColumnName("contrasena")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CorreoUsuario)
-                    .IsRequired()
-                    .HasColumnName("correo_usuario")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.IdRol)
-                    .HasColumnName("id_rol")
-                    .HasColumnType("numeric(18, 0)");
-
-                entity.Property(e => e.NombreUsuario)
-                    .IsRequired()
-                    .HasColumnName("nombre_usuario")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Rol)
-                    .WithMany(p => p.Usuarios)
-                    .HasForeignKey(d => d.IdRol)
-                    .HasConstraintName("FK_dbo.Roles_dbo.Usuarios_IdRol");
+                    .HasConstraintName("FK__usuario_t__id_us__0C85DE4D");
             });
 
             modelBuilder.Entity<ValoracionTienda>(entity =>
             {
                 entity.HasKey(e => e.IdValoracion)
-                    .HasName("PK__valoraci__1861B24956AE353D");
+                    .HasName("PK__valoraci__1861B249DEE6D53D");
 
                 entity.ToTable("valoracion_tienda");
 
@@ -381,8 +427,9 @@ namespace Solution.DAL.EF
                     .HasColumnType("numeric(18, 0)");
 
                 entity.Property(e => e.IdUsuario)
+                    .IsRequired()
                     .HasColumnName("id_usuario")
-                    .HasColumnType("numeric(18, 0)");
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.Valoracion)
                     .HasColumnName("valoracion")
@@ -392,13 +439,13 @@ namespace Solution.DAL.EF
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__valoracio__id_ti__3A81B327");
+                    .HasConstraintName("FK__valoracio__id_ti__09A971A2");
 
                 entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__valoracio__id_us__398D8EEE");
+                    .HasConstraintName("FK__valoracio__id_us__08B54D69");
             });
             OnModelCreatingPartial(modelBuilder);
         }

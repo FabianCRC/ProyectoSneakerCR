@@ -13,6 +13,6 @@ namespace Solution.DO.Objects
         public decimal IdTienda { get; set; }
 
         public virtual Tiendas Tienda { get; set; }
-        public virtual Usuarios Usuario { get; set; }
+        public virtual AspNetUsers Usuario { get; set; }
     }
 }
