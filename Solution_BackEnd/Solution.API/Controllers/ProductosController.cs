@@ -28,7 +28,7 @@ namespace Solution.API.Controllers
 
         // GET: api/Productos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<datamodels.Productos>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<datamodels.Productos>>> GetProductos()
         {
             var aux = await new Solution.BS.Productos(_context).GetAllWithAsync();
 
@@ -83,7 +83,7 @@ namespace Solution.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Productos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -92,7 +92,7 @@ namespace Solution.API.Controllers
             var mapaux = _mapper.Map<datamodels.Productos, data.Productos>(productos);
             new Solution.BS.Productos(_context).Insert(mapaux);
 
-            return CreatedAtAction("GetUsuarios", new { id = productos.IdProducto }, productos);
+            return CreatedAtAction("GetProductos", new { id = productos.IdProducto }, productos);
         }
 
         // DELETE: api/Productos/5
@@ -113,7 +113,7 @@ namespace Solution.API.Controllers
 
         private bool ProductosExists(int id)
         {
-            return (new Solution.BS.AspNetUsers(_context).GetOneById(id) != null);
+            return (new Solution.BS.Productos(_context).GetOneById(id) != null);
         }
 
     }
