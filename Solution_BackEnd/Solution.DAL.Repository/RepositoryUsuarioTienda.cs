@@ -21,7 +21,7 @@ namespace Solution.DAL.Repository
         {
             return await _db.UsuarioTienda
                 .Include(m => m.Tiendas)
-                .Include(m => m.Usuarios)
+                .Include(m => m.AspNetUsers)
                 .ToListAsync();
         }
 
@@ -29,7 +29,7 @@ namespace Solution.DAL.Repository
         {
             return await _db.UsuarioTienda
                  .Include(m => m.Tiendas)
-                .Include(m => m.Usuarios)
+                .Include(m => m.AspNetUsers)
              .SingleOrDefaultAsync(m => m.IdUsuarioTienda == id);
         }
 

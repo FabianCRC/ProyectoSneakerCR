@@ -6,11 +6,11 @@ namespace Solution.DO.Objects
 {
    public class UsuarioTienda
     {
-        public decimal IdUsuarioTienda { get; set; }
+        public int IdUsuarioTienda { get; set; }
         public string IdUsuario { get; set; }
-        public decimal IdTienda { get; set; }
+        public int IdTienda { get; set; }
 
         public virtual Tiendas Tiendas { get; set; }
-        public virtual AspNetUsers Usuarios { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

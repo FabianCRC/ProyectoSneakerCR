@@ -9,11 +9,11 @@ namespace Solution.API.W.DataModel
 {
     public partial class ValoracionTienda
     {
-        public decimal IdValoracion { get; set; }
+        public int IdValoracion { get; set; }
         public decimal Valoracion { get; set; }
         public string Comentario { get; set; }
         public string IdUsuario { get; set; }
-        public decimal IdTienda { get; set; }
+        public int IdTienda { get; set; }
 
         public virtual Tiendas IdTiendaNavigation { get; set; }
         public virtual AspNetUsers IdUsuarioNavigation { get; set; }

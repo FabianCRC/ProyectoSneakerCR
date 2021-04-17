@@ -69,7 +69,6 @@ namespace Solution.DAL.Repository
         }
 
 
-
         public void Insert(T t)
         {
             if (dbContext.Entry<T>(t).State == Microsoft.EntityFrameworkCore.EntityState.Detached)

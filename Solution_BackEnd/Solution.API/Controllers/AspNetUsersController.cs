@@ -56,7 +56,7 @@ namespace Solution.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAspNetUsers(int id, datamodels.AspNetUsers aspnetusers)
         {
-            if (!id.Equals( aspnetusers.Id))
+            if (id.Equals(aspnetusers.Id))
             {
                 return BadRequest();
             }

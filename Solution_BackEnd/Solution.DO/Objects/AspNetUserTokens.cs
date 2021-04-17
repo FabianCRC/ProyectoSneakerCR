@@ -6,6 +6,7 @@ namespace Solution.DO.Objects
 {
     public class AspNetUserTokens
     {
+        public int Id { get; set; }
         public string UserId { get; set; }
         public string LoginProvider { get; set; }
         public string Name { get; set; }

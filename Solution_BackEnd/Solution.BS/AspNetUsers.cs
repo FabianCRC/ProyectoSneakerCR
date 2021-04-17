@@ -31,6 +31,7 @@ namespace Solution.BS
             return new DAL.AspNetUsers(context).GetOneById(id);
         }
 
+
         public void Insert(data.AspNetUsers t)
         {
             new DAL.AspNetUsers(context).Insert(t);

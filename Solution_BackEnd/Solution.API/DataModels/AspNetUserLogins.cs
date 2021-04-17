@@ -7,6 +7,7 @@ namespace Solution.API.DataModels
 {
     public class AspNetUserLogins
     {
+        public int Id { get; set; }
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
         public string ProviderDisplayName { get; set; }

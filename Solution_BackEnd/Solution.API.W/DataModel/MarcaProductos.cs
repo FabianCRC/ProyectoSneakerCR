@@ -14,7 +14,7 @@ namespace Solution.API.W.DataModel
             Productos = new HashSet<Productos>();
         }
 
-        public decimal IdMarca { get; set; }
+        public int IdMarca { get; set; }
         public string MarcaProducto { get; set; }
 
         public virtual ICollection<Productos> Productos { get; set; }

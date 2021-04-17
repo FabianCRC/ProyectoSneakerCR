@@ -13,6 +13,7 @@ namespace Solution.DAL.Repository
         IEnumerable<T> Search(Expression<Func<T, bool>> predicado);
         T GetOne(Expression<Func<T, bool>> predicado);
         T GetOneById(int id);
+
         void Insert(T t);
         void Update(T t);
         void Delete(T t);

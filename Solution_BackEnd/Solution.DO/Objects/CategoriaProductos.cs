@@ -11,7 +11,7 @@ namespace Solution.DO.Objects
             Productos = new HashSet<Productos>();
         }
 
-        public decimal IdCategoria { get; set; }
+        public int IdCategoria { get; set; }
         public string Categoria { get; set; }
 
         public virtual ICollection<Productos> Productos { get; set; }

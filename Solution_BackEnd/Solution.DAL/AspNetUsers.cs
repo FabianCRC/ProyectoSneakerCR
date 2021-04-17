@@ -32,6 +32,7 @@ namespace Solution.DAL
             return _repo.GetOneById(id);
         }
 
+   
         public void Insert(data.AspNetUsers t)
         {
             _repo.Insert(t);

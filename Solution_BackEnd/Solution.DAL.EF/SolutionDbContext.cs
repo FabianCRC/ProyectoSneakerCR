@@ -70,13 +70,17 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<AspNetUserLogins>(entity =>
             {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
-
                 entity.HasIndex(e => e.UserId);
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+                entity.Property(e => e.LoginProvider)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey)
+                    .IsRequired()
+                    .HasMaxLength(128);
 
                 entity.Property(e => e.UserId).IsRequired();
 
@@ -87,9 +91,15 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<AspNetUserRoles>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
-
                 entity.HasIndex(e => e.RoleId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.AspNetUserRoles)
@@ -102,11 +112,19 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<AspNetUserTokens>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+                entity.Property(e => e.LoginProvider)
+                    .IsRequired()
+                    .HasMaxLength(128);
 
-                entity.Property(e => e.Name).HasMaxLength(128);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AspNetUserTokens)
@@ -135,14 +153,11 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<CategoriaProductos>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
-                    .HasName("PK__categori__CD54BC5AE6B98C34");
+                    .HasName("PK__categori__CD54BC5A6A3CE77F");
 
                 entity.ToTable("categoria_productos");
 
-                entity.Property(e => e.IdCategoria)
-                    .HasColumnName("id_categoria")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
 
                 entity.Property(e => e.Categoria)
                     .IsRequired()
@@ -154,14 +169,11 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<CorreoTienda>(entity =>
             {
                 entity.HasKey(e => e.IdCorreo)
-                    .HasName("PK__correo_t__D5CABEB384016DE4");
+                    .HasName("PK__correo_t__D5CABEB357DC4EDF");
 
                 entity.ToTable("correo_tienda");
 
-                entity.Property(e => e.IdCorreo)
-                    .HasColumnName("id_correo")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdCorreo).HasColumnName("id_correo");
 
                 entity.Property(e => e.Correo)
                     .IsRequired()
@@ -175,28 +187,23 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.CorreoTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__correo_ti__id_ti__3D5E1FD2");
+                    .HasConstraintName("FK__correo_ti__id_ti__48CFD27E");
             });
 
             modelBuilder.Entity<MarcaProductos>(entity =>
             {
                 entity.HasKey(e => e.IdMarca)
-                    .HasName("PK__marca_pr__7E43E99E74C9E515");
+                    .HasName("PK__marca_pr__7E43E99EA63ADBEB");
 
                 entity.ToTable("marca_productos");
 
-                entity.Property(e => e.IdMarca)
-                    .HasColumnName("id_marca")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdMarca).HasColumnName("id_marca");
 
                 entity.Property(e => e.MarcaProducto)
                     .IsRequired()
@@ -208,14 +215,11 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<Productos>(entity =>
             {
                 entity.HasKey(e => e.IdProducto)
-                    .HasName("PK__producto__FF341C0D965510C2");
+                    .HasName("PK__producto__FF341C0DF8E0B621");
 
                 entity.ToTable("productos");
 
-                entity.Property(e => e.IdProducto)
-                    .HasColumnName("id_producto")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
 
                 entity.Property(e => e.Anno)
                     .HasColumnName("anno")
@@ -227,17 +231,11 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdCategoria)
-                    .HasColumnName("id_categoria")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
 
-                entity.Property(e => e.IdMarcaProducto)
-                    .HasColumnName("id_marca_producto")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdMarcaProducto).HasColumnName("id_marca_producto");
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.NombreProducto)
                     .IsRequired()
@@ -253,32 +251,29 @@ namespace Solution.DAL.EF
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdCategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__productos__id_ca__2C3393D0");
+                    .HasConstraintName("FK__productos__id_ca__49C3F6B7");
 
                 entity.HasOne(d => d.MarcaProductos)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdMarcaProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__productos__id_ma__2B3F6F97");
+                    .HasConstraintName("FK__productos__id_ma__4AB81AF0");
 
                 entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__productos__id_ti__2A4B4B5E");
+                    .HasConstraintName("FK__productos__id_ti__4BAC3F29");
             });
 
             modelBuilder.Entity<TelefonoTienda>(entity =>
             {
                 entity.HasKey(e => e.IdTelefono)
-                    .HasName("PK__telefono__28CD680245864F14");
+                    .HasName("PK__telefono__28CD6802FDBA2F90");
 
                 entity.ToTable("telefono_tienda");
 
-                entity.Property(e => e.IdTelefono)
-                    .HasColumnName("id_telefono")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdTelefono).HasColumnName("id_telefono");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
@@ -286,9 +281,7 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.Numero)
                     .IsRequired()
@@ -300,20 +293,17 @@ namespace Solution.DAL.EF
                     .WithMany(p => p.TelefonoTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__telefono___id_ti__31EC6D26");
+                    .HasConstraintName("FK__telefono___id_ti__4CA06362");
             });
 
             modelBuilder.Entity<Tiendas>(entity =>
             {
                 entity.HasKey(e => e.IdTienda)
-                    .HasName("PK__tiendas__7C49D73646EF2620");
+                    .HasName("PK__tiendas__7C49D73646EFFE79");
 
                 entity.ToTable("tiendas");
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.DescripcionTienda)
                     .IsRequired()
@@ -331,14 +321,11 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<UbicacionTienda>(entity =>
             {
                 entity.HasKey(e => e.IdUbicacion)
-                    .HasName("PK__ubicacio__81BAA5915DA77443");
+                    .HasName("PK__ubicacio__81BAA591CBA05985");
 
                 entity.ToTable("ubicacion_tienda");
 
-                entity.Property(e => e.IdUbicacion)
-                    .HasColumnName("id_ubicacion")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdUbicacion).HasColumnName("id_ubicacion");
 
                 entity.Property(e => e.Canton)
                     .IsRequired()
@@ -352,9 +339,7 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.Provincia)
                     .IsRequired()
@@ -366,24 +351,19 @@ namespace Solution.DAL.EF
                     .WithMany(p => p.UbicacionTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ubicacion__id_ti__2F10007B");
+                    .HasConstraintName("FK__ubicacion__id_ti__4D94879B");
             });
 
             modelBuilder.Entity<UsuarioTienda>(entity =>
             {
                 entity.HasKey(e => e.IdUsuarioTienda)
-                    .HasName("PK__usuario___12CDCE69A394A8E4");
+                    .HasName("PK__usuario___12CDCE694129E6A5");
 
                 entity.ToTable("usuario_tienda");
 
-                entity.Property(e => e.IdUsuarioTienda)
-                    .HasColumnName("id_usuario_tienda")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdUsuarioTienda).HasColumnName("id_usuario_tienda");
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.IdUsuario)
                     .IsRequired()
@@ -394,26 +374,23 @@ namespace Solution.DAL.EF
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__usuario_t__id_ti__0D7A0286");
+                    .HasConstraintName("FK__usuario_t__id_ti__4E88ABD4");
 
-                entity.HasOne(d => d.Usuarios)
+                entity.HasOne(d => d.AspNetUsers)
                     .WithMany(p => p.UsuarioTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__usuario_t__id_us__0C85DE4D");
+                    .HasConstraintName("FK__usuario_t__id_us__4F7CD00D");
             });
 
             modelBuilder.Entity<ValoracionTienda>(entity =>
             {
                 entity.HasKey(e => e.IdValoracion)
-                    .HasName("PK__valoraci__1861B249DEE6D53D");
+                    .HasName("PK__valoraci__1861B24906D9BD2F");
 
                 entity.ToTable("valoracion_tienda");
 
-                entity.Property(e => e.IdValoracion)
-                    .HasColumnName("id_valoracion")
-                    .HasColumnType("numeric(18, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.IdValoracion).HasColumnName("id_valoracion");
 
                 entity.Property(e => e.Comentario)
                     .IsRequired()
@@ -421,9 +398,7 @@ namespace Solution.DAL.EF
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdTienda)
-                    .HasColumnName("id_tienda")
-                    .HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.IdTienda).HasColumnName("id_tienda");
 
                 entity.Property(e => e.IdUsuario)
                     .IsRequired()
@@ -434,21 +409,22 @@ namespace Solution.DAL.EF
                     .HasColumnName("valoracion")
                     .HasColumnType("numeric(3, 1)");
 
-                entity.HasOne(d => d.Tienda)
+                entity.HasOne(d => d.Tiendas)
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdTienda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__valoracio__id_ti__09A971A2");
+                    .HasConstraintName("FK__valoracio__id_ti__5070F446");
 
-                entity.HasOne(d => d.Usuario)
+                entity.HasOne(d => d.AspNetUsers)
                     .WithMany(p => p.ValoracionTienda)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__valoracio__id_us__08B54D69");
+                    .HasConstraintName("FK__valoracio__id_us__5165187F");
             });
 
             OnModelCreatingPartial(modelBuilder);
         }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
     }

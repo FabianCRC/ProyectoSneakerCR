@@ -82,7 +82,7 @@ namespace Solution.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Clase
+        // POST: api/MarcaProductos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -91,7 +91,7 @@ namespace Solution.API.Controllers
             var mapaux = _mapper.Map<datamodels.MarcaProductos, data.MarcaProductos>(marcaProductos);
             new Solution.BS.MarcaProductos(_context).Insert(mapaux);
 
-            return CreatedAtAction("GetRoles", new { id = marcaProductos.IdMarca }, marcaProductos);
+            return CreatedAtAction("GetMarcaProductos", new { id = marcaProductos.IdMarca }, marcaProductos);
         }
 
         // DELETE: api/MarcaProductos/5
