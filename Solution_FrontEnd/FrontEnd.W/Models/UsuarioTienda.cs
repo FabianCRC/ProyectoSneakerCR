@@ -9,9 +9,9 @@ namespace FrontEnd.W.Models
 {
     public partial class UsuarioTienda
     {
-        public decimal IdUsuarioTienda { get; set; }
+        public int IdUsuarioTienda { get; set; }
         public string IdUsuario { get; set; }
-        public decimal IdTienda { get; set; }
+        public int IdTienda { get; set; }
 
         public virtual Tiendas IdTiendaNavigation { get; set; }
         public virtual AspNetUsers IdUsuarioNavigation { get; set; }

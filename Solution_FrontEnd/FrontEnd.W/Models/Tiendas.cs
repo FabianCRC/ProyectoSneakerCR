@@ -19,7 +19,7 @@ namespace FrontEnd.W.Models
             ValoracionTienda = new HashSet<ValoracionTienda>();
         }
 
-        public decimal IdTienda { get; set; }
+        public int IdTienda { get; set; }
         public string NombreTienda { get; set; }
         public string DescripcionTienda { get; set; }
 

@@ -25,7 +25,7 @@ namespace FrontEnd.W.Controllers
         }
 
         // GET: CategoriaProductos/Details/5
-        public async Task<IActionResult> Details(decimal? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace FrontEnd.W.Controllers
         }
 
         // GET: CategoriaProductos/Edit/5
-        public async Task<IActionResult> Edit(decimal? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace FrontEnd.W.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("IdCategoria,Categoria")] CategoriaProductos categoriaProductos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Categoria")] CategoriaProductos categoriaProductos)
         {
             if (id != categoriaProductos.IdCategoria)
             {
@@ -116,7 +116,7 @@ namespace FrontEnd.W.Controllers
         }
 
         // GET: CategoriaProductos/Delete/5
-        public async Task<IActionResult> Delete(decimal? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace FrontEnd.W.Controllers
         // POST: CategoriaProductos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(decimal id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var categoriaProductos = await _context.CategoriaProductos.FindAsync(id);
             _context.CategoriaProductos.Remove(categoriaProductos);
@@ -144,7 +144,7 @@ namespace FrontEnd.W.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaProductosExists(decimal id)
+        private bool CategoriaProductosExists(int id)
         {
             return _context.CategoriaProductos.Any(e => e.IdCategoria == id);
         }
