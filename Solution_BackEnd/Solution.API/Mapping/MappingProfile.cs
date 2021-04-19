@@ -24,6 +24,9 @@ namespace Solution.API.Mapping
             CreateMap<data.ValoracionTienda, DataModels.ValoracionTienda>().ReverseMap();
             CreateMap<data.AspNetUserLogins, DataModels.AspNetUserLogins>().ReverseMap();
             CreateMap<data.AspNetUserClaims, DataModels.AspNetUserClaims>().ReverseMap();
+            CreateMap<data.AspNetUserRoles, DataModels.AspNetUserRoles>().ReverseMap();
+            CreateMap<data.AspNetRoles, DataModels.AspNetRoles>().ReverseMap(); 
+            CreateMap<data.AspNetRoleClaims, DataModels.AspNetRoleClaims>().ReverseMap(); 
 
 
 
