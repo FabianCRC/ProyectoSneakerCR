@@ -13,7 +13,7 @@ namespace FrontEnd.W.Controllers
 {
     public class UbicacionTiendasController : Controller
     {
-        string baseurl = "https://localhost:44359/";
+        string baseurl = "https://localhost:5001/";
 
 
         // GET: UbicacionTienda

@@ -9,34 +9,35 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 
+
 namespace FrontEnd.API.Controllers
 {
-    public class TelefonoTiendasController : Controller
+    public class AspNetRolesController : Controller
     {
         string baseurl = "https://localhost:5001/";
 
-
-        // GET: TelefonoTienda
+        // GET: AspNetRoles 
         public async Task<IActionResult> Index()
         {
-            List<data.TelefonoTienda> aux = new List<data.TelefonoTienda>();
+
+            List<data.AspNetRoles> aux = new List<data.AspNetRoles>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/TelefonoTienda");
+                HttpResponseMessage res = await cl.GetAsync("api/AspNetRoles");
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.TelefonoTienda>>(auxres);
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetRoles>>(auxres);
                 }
             }
             return View(aux);
         }
 
-        // GET: TelefonoTienda/Details/5
+        // GET: AspNetRoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,41 +45,40 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var telefonotienda = GetById(id);
+            var aspNetRoles = GetById(id);
 
 
-            if (telefonotienda == null)
+            if (aspNetRoles == null)
             {
                 return NotFound();
             }
 
-            return View(telefonotienda);
+            return View(aspNetRoles);
         }
 
-        // GET: TelefonoTienda/Create
+        // GET: Tiendas/Create
         public IActionResult Create()
         {
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda");
             return View();
         }
 
-        //POST: TelefonoTienda/Create
-        //To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // POST: AspNetRoles/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descripcion,Numero,IdTienda")] data.TelefonoTienda telefonotienda)
+        public async Task<IActionResult> Create([Bind("Id,Name,NormalizedName,ConcurrencyStamp")] data.AspNetRoles aspNetRoles)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(telefonotienda);
+                    var content = JsonConvert.SerializeObject(aspNetRoles);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    var postTask = cl.PostAsync("api/TelefonoTienda", byteContent).Result;
+                    var postTask = cl.PostAsync("api/AspNetRoles", byteContent).Result;
 
                     if (postTask.IsSuccessStatusCode)
                     {
@@ -86,38 +86,33 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", telefonotienda.IdTienda);
-
-            return View(telefonotienda);
+            return View(aspNetRoles);
         }
 
-        // GET: TelefonoTienda/Edit/5
+        // GET: AspNetRoles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-
-            var telefonotienda = GetById(id);
-            if (telefonotienda == null)
+   
+            var aspNetRoles = GetById(id);
+            if (aspNetRoles == null)
             {
                 return NotFound();
             }
-
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", telefonotienda.IdTienda);
-            return View(telefonotienda);
+            return View(aspNetRoles);
         }
 
-        //// POST: TelefonoTienda/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: aspNetRoles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Descripcion,Numero,IdTienda")] data.TelefonoTienda telefonotienda)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NormalizedName,ConcurrencyStamp")] data.AspNetRoles aspNetRoles)
         {
-            if (id != telefonotienda.IdTelefono)
+            if (id != Convert.ToInt32(aspNetRoles.Id))
             {
                 return NotFound();
             }
@@ -129,11 +124,11 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(telefonotienda);
+                        var content = JsonConvert.SerializeObject(aspNetRoles);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PutAsync("api/TelefonoTienda/" + id, byteContent).Result;
+                        var postTask = cl.PutAsync("api/AspNetRoles/" + id, byteContent).Result;
 
                         if (postTask.IsSuccessStatusCode)
                         {
@@ -155,12 +150,10 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", telefonotienda.IdTienda);
-
-            return View(telefonotienda);
+            return View(aspNetRoles);
         }
 
-        //// GET: TelefonoTienda/Delete/5
+        // GET: Tiendas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,16 +161,16 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var telefonotienda = GetById(id);
-            if (telefonotienda == null)
+            var aspNetRoles = GetById(id);
+            if (aspNetRoles == null)
             {
                 return NotFound();
             }
 
-            return View(telefonotienda);
+            return View(aspNetRoles);
         }
 
-        //// POST: TelefonoTienda/Delete/5
+        // POST: AspNetRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -187,7 +180,7 @@ namespace FrontEnd.API.Controllers
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.DeleteAsync("api/TelefonoTienda/" + id);
+                HttpResponseMessage res = await cl.DeleteAsync("api/AspNetRoles/" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -197,44 +190,26 @@ namespace FrontEnd.API.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        private bool TelefonoTiendaExists(int id)
+        private bool AspNetRolesExists(int id)
         {
             return (GetById(id) != null);
         }
-        private data.TelefonoTienda GetById(int? id)
+
+        private data.AspNetRoles GetById(int? id)
         {
-            data.TelefonoTienda aux = new data.TelefonoTienda();
+            data.AspNetRoles aux = new data.AspNetRoles();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/TelefonoTienda/" + id).Result;
+
+                HttpResponseMessage res = cl.GetAsync("api/AspNetRoles/" + id).Result;
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<data.TelefonoTienda>(auxres);
-                }
-            }
-            return aux;
-        }
-        private List<data.Tiendas> getAllTiendas()
-        {
-
-            List<data.Tiendas> aux = new List<data.Tiendas>();
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/Tiendas").Result;
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.Tiendas>>(auxres);
+                    aux = JsonConvert.DeserializeObject<data.AspNetRoles>(auxres);
                 }
             }
             return aux;

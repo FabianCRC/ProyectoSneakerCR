@@ -14,7 +14,7 @@ namespace FrontEnd.API.Controllers
 {
     public class TiendasController : Controller
     {
-            string baseurl = "https://localhost:44359/";
+            string baseurl = "https://localhost:5001/";
 
             // GET: Tiendas 
             public async Task<IActionResult> Index()
