@@ -97,7 +97,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -128,13 +128,28 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Widgets
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Tiendas" asp-action="Index">Tiendas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">Categoria Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="MarcaProductos" asp-action="Index">Marca Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="CorreoTiendas" asp-action="Index">Correos de tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="TelefonoTiendas" asp-action="Index">Telefonos de tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="UbicacionTiendas" asp-action="Index">Ubicacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="AspNetUserClaims" asp-action="Index">AspNetUserClaims</a>
                         </li>
                     </ul>
                 </nav>
