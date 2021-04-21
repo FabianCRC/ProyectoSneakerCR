@@ -13,7 +13,7 @@ namespace FrontEnd.API.Controllers
 {
     public class AspNetUserClaimsController : Controller
     {
-        string baseurl = "https://localhost:5001/";
+        string baseurl = "https://localhost:61265/";
 
 
         // GET: AspNetUserClaims

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 
-namespace FrontEnd.W.Controllers
+namespace FrontEnd.API.Controllers
 {
     public class UbicacionTiendasController : Controller
     {
-        string baseurl = "https://localhost:5001/";
+        string baseurl = "https://localhost:61265/";
 
 
         // GET: UbicacionTienda
