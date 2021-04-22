@@ -11,32 +11,32 @@ using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
-    public class AspNetUserRolesController : Controller
+    public class UsuarioTiendasController : Controller
     {
         string baseurl = "https://localhost:61265/";
 
 
-        // GET: AspUserRoles
+        // GET: UsuarioTienda
         public async Task<IActionResult> Index()
         {
-            List<data.AspNetUserRoles> aux = new List<data.AspNetUserRoles>();
+            List<data.UsuarioTienda> aux = new List<data.UsuarioTienda>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/AspNetUserRoles");
+                HttpResponseMessage res = await cl.GetAsync("api/UsuarioTienda");
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.AspNetUserRoles>>(auxres);
+                    aux = JsonConvert.DeserializeObject<List<data.UsuarioTienda>>(auxres);
                 }
             }
             return View(aux);
         }
 
-        // GET: AspNetUserRoles/Details/5
+        // GET: UsuarioTienda/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,42 +44,42 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspUserRoles = GetById(id);
+            var usuarioTienda = GetById(id);
 
 
-            if (aspUserRoles == null)
+            if (usuarioTienda == null)
             {
                 return NotFound();
             }
 
-            return View(aspUserRoles);
+            return View(usuarioTienda);
         }
 
-        // GET: AspNetUserRoles/Create
+        // GET: UsuarioTienda/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "Id");
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id");
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda");
+            ViewData["IdUsuario"] = new SelectList(getAllAspNetUsers(), "Id", "Id");
             return View();
         }
 
-        //POST: AspNetUserRoles/Create
+        //POST: UsuarioTienda/Create
         //To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Create([Bind("IdUsuarioTienda,IdUsuario,IdTienda")] data.UsuarioTienda usuarioTienda)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(aspNetUserRoles);
+                    var content = JsonConvert.SerializeObject(usuarioTienda);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    var postTask = cl.PostAsync("api/AspNetUserRoles", byteContent).Result;
+                    var postTask = cl.PostAsync("api/UsuarioTienda", byteContent).Result;
 
                     if (postTask.IsSuccessStatusCode)
                     {
@@ -88,12 +88,14 @@ namespace FrontEnd.API.Controllers
                 }
             }
 
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
+
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", usuarioTienda.IdTienda);
+            ViewData["IdUsuario"] = new SelectList(getAllAspNetUsers(), "Id", "Id", usuarioTienda.IdUsuario);
+
+            return View(usuarioTienda);
         }
 
-        // GET: AspNetUserRoles/Edit/5
+        // GET: UsuarioTienda/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -102,26 +104,26 @@ namespace FrontEnd.API.Controllers
             }
 
 
-            var aspNetUserRoles = GetById(id);
-            if (aspNetUserRoles == null)
+            var usuarioTienda = GetById(id);
+            if (usuarioTienda == null)
             {
                 return NotFound();
             }
 
 
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", usuarioTienda.IdTienda);
+            ViewData["IdUsuario"] = new SelectList(getAllAspNetUsers(), "Id", "Id", usuarioTienda.IdUsuario);
+            return View(usuarioTienda);
         }
 
-        //// POST: AspNetUserRoles/Edit/5
+        //// POST: UsuarioTienda/Edit/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
         //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Edit(int id, [Bind("IdUsuarioTienda,IdUsuario,IdTienda")] data.UsuarioTienda usuarioTienda)
         {
-            if (id != aspNetUserRoles.Id)
+            if (id != usuarioTienda.IdUsuarioTienda)
             {
                 return NotFound();
             }
@@ -133,11 +135,11 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(aspNetUserRoles);
+                        var content = JsonConvert.SerializeObject(usuarioTienda);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PutAsync("api/AspNetUserRoles/" + id, byteContent).Result;
+                        var postTask = cl.PutAsync("api/UsuarioTienda/" + id, byteContent).Result;
 
                         if (postTask.IsSuccessStatusCode)
                         {
@@ -159,12 +161,13 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", usuarioTienda.IdTienda);
+            ViewData["IdUsuario"] = new SelectList(getAllAspNetUsers(), "Id", "Id", usuarioTienda.IdUsuario);
+
+            return View(usuarioTienda);
         }
 
-        //// GET: AspNetUserRoles/Delete/5
+        //// GET: UsuarioTienda/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -172,16 +175,16 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspNetUserRoles = GetById(id);
-            if (aspNetUserRoles == null)
+            var usuarioTienda = GetById(id);
+            if (usuarioTienda == null)
             {
                 return NotFound();
             }
 
-            return View(aspNetUserRoles);
+            return View(usuarioTienda);
         }
 
-        //// POST: AspNetUserRoles/Delete/5
+        //// POST: UsuarioTienda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -191,7 +194,7 @@ namespace FrontEnd.API.Controllers
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.DeleteAsync("api/AspNetUserRoles/" + id);
+                HttpResponseMessage res = await cl.DeleteAsync("api/UsuarioTienda/" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -202,44 +205,44 @@ namespace FrontEnd.API.Controllers
         }
 
 
-        private bool AspNetUserRolesExists(int id)
+        private bool UsuarioTiendaExists(int id)
         {
             return (GetById(id) != null);
         }
-        private data.AspNetUserRoles GetById(int? id)
+        private data.UsuarioTienda GetById(int? id)
         {
-            data.AspNetUserRoles aux = new data.AspNetUserRoles();
+            data.UsuarioTienda aux = new data.UsuarioTienda();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/AspNetUserRoles/" + id).Result;
+                HttpResponseMessage res = cl.GetAsync("api/UsuarioTienda/" + id).Result;
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<data.AspNetUserRoles>(auxres);
+                    aux = JsonConvert.DeserializeObject<data.UsuarioTienda>(auxres);
                 }
             }
             return aux;
         }
 
-        private List<data.AspNetRoles> getAllAspNetRoles()
+        private List<data.Tiendas> getAllTiendas()
         {
 
-            List<data.AspNetRoles> aux = new List<data.AspNetRoles>();
+            List<data.Tiendas> aux = new List<data.Tiendas>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/AspNetRoles").Result;
+                HttpResponseMessage res = cl.GetAsync("api/Tiendas").Result;
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.AspNetRoles>>(auxres);
+                    aux = JsonConvert.DeserializeObject<List<data.Tiendas>>(auxres);
                 }
             }
             return aux;
@@ -263,5 +266,6 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
+
     }
 }
