@@ -69,7 +69,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,DateDiscontinued")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Create([Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace FrontEnd.API.Controllers
         //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,DateDiscontinued")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
         {
             if (id != aspNetUserRoles.Id)
             {

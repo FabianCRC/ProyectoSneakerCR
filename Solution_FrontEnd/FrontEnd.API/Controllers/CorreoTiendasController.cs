@@ -68,7 +68,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Correo,Descripcion,IdTienda")] data.CorreoTienda correotienda)
+        public async Task<IActionResult> Create([Bind("IdCorreo,Correo,Descripcion,IdTienda")] data.CorreoTienda correotienda)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace FrontEnd.API.Controllers
         //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Correo,Descripcion,IdTienda")] data.CorreoTienda correotienda)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCorreo,Correo,Descripcion,IdTienda")] data.CorreoTienda correotienda)
         {
             if (id != correotienda.IdCorreo)
             {

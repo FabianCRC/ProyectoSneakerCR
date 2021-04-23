@@ -59,9 +59,9 @@ namespace FrontEnd.API.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarcaProducto", "MarcaProducto");
-            ViewData["IdCategorias"] = new SelectList(getAllCategoriaProductos(), "IdCategorias", "Categoria");
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda");
+            ViewData["IdCategoria"] = new SelectList(getAllCategoriaProductos(), "IdCategoria", "Categoria");
+            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarca", "MarcaProducto");
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,OrderStatus,OrderDate,RequiredDate,ShippedDate,StoreId,StaffId")] data.Productos productos)
+        public async Task<IActionResult> Create([Bind("IdProducto,NombreProducto,DescripcionPproducto,Anno,Valor,IdMarcaProducto,IdTienda,IdCategoria")] data.Productos productos)
         {
             if (ModelState.IsValid)
             {
@@ -89,9 +89,9 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarcaProducto", "MarcaProducto", productos.IdMarcaProducto);
-            ViewData["IdCategorias"] = new SelectList(getAllCategoriaProductos(), "IdCategorias", "Categoria", productos.IdCategoria);
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", productos.IdTienda);
+            ViewData["IdCategoria"] = new SelectList(getAllCategoriaProductos(), "IdCategoria", "Categoria", productos.IdCategoria);
+            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarca", "MarcaProducto", productos.IdMarcaProducto);
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", productos.IdTienda);
             return View(productos);
         }
 
@@ -110,9 +110,10 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarcaProducto", "MarcaProducto", productos.IdMarcaProducto);
-            ViewData["IdCategorias"] = new SelectList(getAllCategoriaProductos(), "IdCategorias", "Categoria", productos.IdCategoria);
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", productos.IdTienda);
+            ViewData["IdCategoria"] = new SelectList(getAllCategoriaProductos(), "IdCategoria", "Categoria", productos.IdCategoria);
+            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarca", "MarcaProducto", productos.IdMarcaProducto);
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", productos.IdTienda);
+
             return View(productos);
         }
 
@@ -121,7 +122,7 @@ namespace FrontEnd.API.Controllers
         //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,CustomerId,OrderStatus,OrderDate,RequiredDate,ShippedDate,StoreId,StaffId")] data.Productos productos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,NombreProducto,DescripcionPproducto,Anno,Valor,IdMarcaProducto,IdTienda,IdCategoria")]  data.Productos productos)
         {
             if (id != productos.IdProducto)
             {
@@ -161,9 +162,9 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarcaProducto", "MarcaProducto", productos.IdMarcaProducto);
-            ViewData["IdCategorias"] = new SelectList(getAllCategoriaProductos(), "IdCategorias", "Categoria", productos.IdCategoria);
-            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "NombreTienda", productos.IdTienda);
+            ViewData["IdCategoria"] = new SelectList(getAllCategoriaProductos(), "IdCategoria", "Categoria", productos.IdCategoria);
+            ViewData["IdMarcaProducto"] = new SelectList(getAllMarcaProductos(), "IdMarca", "MarcaProducto", productos.IdMarcaProducto);
+            ViewData["IdTienda"] = new SelectList(getAllTiendas(), "IdTienda", "DescripcionTienda", productos.IdTienda);
             return View(productos);
         }
 

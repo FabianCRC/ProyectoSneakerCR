@@ -15,10 +15,10 @@ namespace FrontEnd.API.Controllers
     {
         string baseurl = "http://localhost:61265/";
 
-        // GET: AspNetUserLogins 
+
+        // GET: AspNetUserLogins
         public async Task<IActionResult> Index()
         {
-
             List<data.AspNetUserLogins> aux = new List<data.AspNetUserLogins>();
             using (var cl = new HttpClient())
             {
@@ -44,36 +44,37 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspnetuserlogins = GetById(id);
+            var aspNetUserLogins = GetById(id);
 
 
-            if (aspnetuserlogins == null)
+            if (aspNetUserLogins == null)
             {
                 return NotFound();
             }
 
-            return View(aspnetuserlogins);
+            return View(aspNetUserLogins);
         }
 
         // GET: AspNetUserLogins/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(getAspNetUsers(), "Id", "Id");
             return View();
         }
 
-        // POST: AspNetUserLogins/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //POST: AspNetUserLogins/Create
+        //To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspnetuserlogins)
+        public async Task<IActionResult> Create([Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspNetUserLogins)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(aspnetuserlogins);
+                    var content = JsonConvert.SerializeObject(aspNetUserLogins);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -85,7 +86,8 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            return View(aspnetuserlogins);
+            ViewData["UserId"] = new SelectList(getAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
+            return View(aspNetUserLogins);
         }
 
         // GET: AspNetUserLogins/Edit/5
@@ -96,22 +98,25 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspnetuserlogins = GetById(id);
-            if (aspnetuserlogins == null)
+
+            var aspNetUserLogins = GetById(id);
+            if (aspNetUserLogins == null)
             {
                 return NotFound();
             }
-            return View(aspnetuserlogins);
+
+            ViewData["UserId"] = new SelectList(getAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
+            return View(aspNetUserLogins);
         }
 
-        // POST: AspNetUserLogins/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //// POST: AspNetUserLogins/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspnetuserlogins)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspNetUserLogins)
         {
-            if (id != aspnetuserlogins.Id)
+            if (id != aspNetUserLogins.Id)
             {
                 return NotFound();
             }
@@ -123,7 +128,7 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(aspnetuserlogins);
+                        var content = JsonConvert.SerializeObject(aspNetUserLogins);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -149,10 +154,11 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(aspnetuserlogins);
+            ViewData["UserId"] = new SelectList(getAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
+            return View(aspNetUserLogins);
         }
 
-        // GET: AspNetUserLogins/Delete/5
+        //// GET: AspNetUserLogins/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,16 +166,16 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspnetuserlogins = GetById(id);
-            if (aspnetuserlogins == null)
+            var aspNetUserLogins = GetById(id);
+            if (aspNetUserLogins == null)
             {
                 return NotFound();
             }
 
-            return View(aspnetuserlogins);
+            return View(aspNetUserLogins);
         }
 
-        // POST: AspNetUserLogins/Delete/5
+        //// POST: AspNetUserLogins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -189,11 +195,11 @@ namespace FrontEnd.API.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool AspNetUserLoginsExists(int id)
         {
             return (GetById(id) != null);
         }
-
         private data.AspNetUserLogins GetById(int? id)
         {
             data.AspNetUserLogins aux = new data.AspNetUserLogins();
@@ -208,6 +214,27 @@ namespace FrontEnd.API.Controllers
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
                     aux = JsonConvert.DeserializeObject<data.AspNetUserLogins>(auxres);
+                }
+            }
+            return aux;
+        }
+     
+
+        private List<data.AspNetUsers> getAspNetUsers()
+        {
+
+            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
                 }
             }
             return aux;
