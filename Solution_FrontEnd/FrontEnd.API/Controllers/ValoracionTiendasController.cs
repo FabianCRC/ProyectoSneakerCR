@@ -13,7 +13,8 @@ namespace FrontEnd.API.Controllers
 {
     public class ValoracionTiendasController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
+
 
 
         // GET: ValoracionTienda

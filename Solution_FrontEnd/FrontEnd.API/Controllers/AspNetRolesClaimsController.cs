@@ -11,26 +11,26 @@ using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
-    public class AspNetUserLoginsController : Controller
+    public class AspNetRoleClaimsController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
 
-
-        // GET: AspNetUserLogins
+        // GET: AspNetRoleClaims 
         public async Task<IActionResult> Index()
         {
-            List<data.AspNetUserLogins> aux = new List<data.AspNetUserLogins>();
+
+            List<data.AspNetRoleClaims> aux = new List<data.AspNetRoleClaims>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/AspNetUserLogins");
+                HttpResponseMessage res = await cl.GetAsync("api/AspNetRoleClaims");
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.AspNetUserLogins>>(auxres);
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetRoleClaims>>(auxres);
                 }
             }
             return View(aux);
@@ -44,41 +44,40 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspNetUserLogins = GetById(id);
+            var aspnetroleclaims = GetById(id);
 
 
-            if (aspNetUserLogins == null)
+            if (aspnetroleclaims == null)
             {
                 return NotFound();
             }
 
-            return View(aspNetUserLogins);
+            return View(aspnetroleclaims);
         }
 
-        // GET: AspNetUserLogins/Create
+        // GET: AspNetRoleClaims/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id");
             return View();
         }
 
-        //POST: AspNetUserLogins/Create
-        //To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // POST: AspNetRoleClaims/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspNetUserLogins)
+        public async Task<IActionResult> Create([Bind("Id,RoleId,ClaimType,ClaimValue")] data.AspNetRoleClaims aspnetroleclaims)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(aspNetUserLogins);
+                    var content = JsonConvert.SerializeObject(aspnetroleclaims);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    var postTask = cl.PostAsync("api/AspNetUserLogins", byteContent).Result;
+                    var postTask = cl.PostAsync("api/AspNetRoleClaims", byteContent).Result;
 
                     if (postTask.IsSuccessStatusCode)
                     {
@@ -86,14 +85,10 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-
-
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
-
-            return View(aspNetUserLogins);
+            return View(aspnetroleclaims);
         }
 
-        // GET: aspNetUserLogins/Edit/5
+        // GET: AspNetRoleClaims/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -101,26 +96,22 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-
-            var aspNetUserLogins = GetById(id);
-            if (aspNetUserLogins == null)
+            var aspnetroleclaims = GetById(id);
+            if (aspnetroleclaims == null)
             {
                 return NotFound();
             }
-
-
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
-            return View(aspNetUserLogins);
+            return View(aspnetroleclaims);
         }
 
-        //// POST: AspNetRoleClaims/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: AspNetRoleClaims/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LoginProvider,ProviderKey,ProviderDisplayName,UserId")] data.AspNetUserLogins aspNetUserLogins)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RoleId,ClaimType,ClaimValue")] data.AspNetRoleClaims aspnetroleclaims)
         {
-            if (id != aspNetUserLogins.Id)
+            if (id != aspnetroleclaims.Id)
             {
                 return NotFound();
             }
@@ -132,11 +123,11 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(aspNetUserLogins);
+                        var content = JsonConvert.SerializeObject(aspnetroleclaims);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PutAsync("api/AspNetUserLogins/" + id, byteContent).Result;
+                        var postTask = cl.PutAsync("api/AspNetRoleClaims/" + id, byteContent).Result;
 
                         if (postTask.IsSuccessStatusCode)
                         {
@@ -158,12 +149,10 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserLogins.UserId);
-
-            return View(aspNetUserLogins);
+            return View(aspnetroleclaims);
         }
 
-        //// GET: AspNetUserRoles/Delete/5
+        // GET: AspNetRoleClaims/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,16 +160,16 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspNetUserLogins = GetById(id);
-            if (aspNetUserLogins == null)
+            var aspnetroleclaims = GetById(id);
+            if (aspnetroleclaims == null)
             {
                 return NotFound();
             }
 
-            return View(aspNetUserLogins);
+            return View(aspnetroleclaims);
         }
 
-        //// POST: AspNetUserRoles/Delete/5
+        // POST: AspNetRoleClaims/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -190,7 +179,7 @@ namespace FrontEnd.API.Controllers
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.DeleteAsync("api/AspNetUserLogins/" + id);
+                HttpResponseMessage res = await cl.DeleteAsync("api/AspNetRoleClaims/" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -200,45 +189,25 @@ namespace FrontEnd.API.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        private bool AspNetUserLoginsExists(int id)
+        private bool AspNetRoleClaimsExists(int id)
         {
             return (GetById(id) != null);
         }
-        private data.AspNetUserLogins GetById(int? id)
+
+        private data.AspNetRoleClaims GetById(int? id)
         {
-            data.AspNetUserLogins aux = new data.AspNetUserLogins();
+            data.AspNetRoleClaims aux = new data.AspNetRoleClaims();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/AspNetUserLogins/" + id).Result;
+                HttpResponseMessage res = cl.GetAsync("api/AspNetRoleClaims/" + id).Result;
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<data.AspNetUserLogins>(auxres);
-                }
-            }
-            return aux;
-        }
-
-        private List<data.AspNetUsers> getAllAspNetUsers()
-        {
-
-            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
+                    aux = JsonConvert.DeserializeObject<data.AspNetRoleClaims>(auxres);
                 }
             }
             return aux;

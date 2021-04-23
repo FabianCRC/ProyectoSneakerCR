@@ -9,14 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 
+
 namespace FrontEnd.API.Controllers
 {
     public class AspNetUserTokensController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
 
 
-        // GET: AspNetUserTokens
+
         public async Task<IActionResult> Index()
         {
             List<data.AspNetUserTokens> aux = new List<data.AspNetUserTokens>();
@@ -86,8 +87,6 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-
-
             ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserTokens.UserId);
             return View(aspNetUserTokens);
         }
@@ -156,7 +155,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserTokens.UserId);
+            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserTokens.UserId);
             return View(aspNetUserTokens);
         }
 
@@ -177,7 +176,7 @@ namespace FrontEnd.API.Controllers
             return View(aspNetUserTokens);
         }
 
-        //// POST: AspNetUserRoles/Delete/5
+        //// POST: AspNetUserTokens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -220,7 +219,7 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
-
+      
 
         private List<data.AspNetUsers> getAllAspNetUsers()
         {

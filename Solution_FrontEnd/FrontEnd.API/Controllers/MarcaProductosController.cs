@@ -13,7 +13,8 @@ namespace FrontEnd.API.Controllers
 {
     public class MarcaProductosController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
+
 
         // GET: MarcaProductos 
         public async Task<IActionResult> Index()
@@ -25,7 +26,7 @@ namespace FrontEnd.API.Controllers
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/CategoriaProducto");
+                HttpResponseMessage res = await cl.GetAsync("api/MarcaProductos");
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -44,18 +45,18 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var marcaproductos = GetById(id);
+            var marcaProductos = GetById(id);
 
 
-            if (marcaproductos == null)
+            if (marcaProductos == null)
             {
                 return NotFound();
             }
 
-            return View(marcaproductos);
+            return View(marcaProductos);
         }
 
-        // GET: MarcaProductos/Create
+        // GET: Tiendas/Create
         public IActionResult Create()
         {
             return View();
@@ -66,14 +67,14 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MarcaProducto")] data.MarcaProductos marcaproductos)
+        public async Task<IActionResult> Create([Bind("IdMarca,MarcaProducto")] data.MarcaProductos marcaProductos)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(marcaproductos);
+                    var content = JsonConvert.SerializeObject(marcaProductos);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -85,7 +86,7 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            return View(marcaproductos);
+            return View(marcaProductos);
         }
 
         // GET: MarcaProductos/Edit/5
@@ -96,22 +97,22 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var marcaproductos = GetById(id);
-            if (marcaproductos == null)
+            var marcaProductos = GetById(id);
+            if (marcaProductos == null)
             {
                 return NotFound();
             }
-            return View(marcaproductos);
+            return View(marcaProductos);
         }
 
-        // POST: MarcaProductos/Edit/5
+        // POST: marcaProductos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MarcaProducto")] data.MarcaProductos marcaproductos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdMarca,MarcaProducto")] data.MarcaProductos marcaProductos)
         {
-            if (id != marcaproductos.IdMarca)
+            if (id != Convert.ToInt32(marcaProductos.IdMarca))
             {
                 return NotFound();
             }
@@ -123,7 +124,7 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(marcaproductos);
+                        var content = JsonConvert.SerializeObject(marcaProductos);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -149,10 +150,10 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(marcaproductos);
+            return View(marcaProductos);
         }
 
-        // GET: MarcaProductos/Delete/5
+        // GET: Tiendas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,13 +161,13 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var marcaproductos = GetById(id);
-            if (marcaproductos == null)
+            var marcaProductos = GetById(id);
+            if (marcaProductos == null)
             {
                 return NotFound();
             }
 
-            return View(marcaproductos);
+            return View(marcaProductos);
         }
 
         // POST: MarcaProductos/Delete/5

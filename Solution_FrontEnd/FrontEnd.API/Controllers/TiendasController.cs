@@ -14,10 +14,11 @@ namespace FrontEnd.API.Controllers
 {
     public class TiendasController : Controller
     {
-            string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
 
-            // GET: Tiendas 
-            public async Task<IActionResult> Index()
+
+        // GET: Tiendas 
+        public async Task<IActionResult> Index()
             {
 
                 List<data.Tiendas> aux = new List<data.Tiendas>();

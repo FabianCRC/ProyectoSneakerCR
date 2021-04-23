@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 
-
 namespace FrontEnd.API.Controllers
 {
     public class CategoriaProductosController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
+
 
         // GET: CategoriaProductos 
         public async Task<IActionResult> Index()
@@ -45,18 +45,18 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var categoriaproductos = GetById(id);
+            var categoriaProductos = GetById(id);
 
 
-            if (categoriaproductos == null)
+            if (categoriaProductos == null)
             {
                 return NotFound();
             }
 
-            return View(categoriaproductos);
+            return View(categoriaProductos);
         }
 
-        // GET: CategoriaProductos/Create
+        // GET: Tiendas/Create
         public IActionResult Create()
         {
             return View();
@@ -67,14 +67,14 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Categoria")] data.CategoriaProductos categoriaproductos)
+        public async Task<IActionResult> Create([Bind("IdCategoria,Categoria")] data.CategoriaProductos categoriaProductos)
         {
             if (ModelState.IsValid)
             {
                 using (var cl = new HttpClient())
                 {
                     cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(categoriaproductos);
+                    var content = JsonConvert.SerializeObject(categoriaProductos);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
                     byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -86,7 +86,7 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            return View(categoriaproductos);
+            return View(categoriaProductos);
         }
 
         // GET: CategoriaProductos/Edit/5
@@ -97,22 +97,22 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var categoriaproductos = GetById(id);
-            if (categoriaproductos == null)
+            var categoriaProductos = GetById(id);
+            if (categoriaProductos == null)
             {
                 return NotFound();
             }
-            return View(categoriaproductos);
+            return View(categoriaProductos);
         }
 
-        // POST: CategoriaProductos/Edit/5
+        // POST: categoriaProductos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Categoria")] data.CategoriaProductos categoriaproductos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Categoria")] data.CategoriaProductos categoriaProductos)
         {
-            if (id != categoriaproductos.IdCategoria)
+            if (id != Convert.ToInt32(categoriaProductos.IdCategoria))
             {
                 return NotFound();
             }
@@ -124,7 +124,7 @@ namespace FrontEnd.API.Controllers
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(categoriaproductos);
+                        var content = JsonConvert.SerializeObject(categoriaProductos);
                         var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                         var byteContent = new ByteArrayContent(buffer);
                         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -150,10 +150,10 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriaproductos);
+            return View(categoriaProductos);
         }
 
-        // GET: CategoriaProductos/Delete/5
+        // GET: Tiendas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -161,13 +161,13 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var categoriaproductos = GetById(id);
-            if (categoriaproductos == null)
+            var categoriaProductos = GetById(id);
+            if (categoriaProductos == null)
             {
                 return NotFound();
             }
 
-            return View(categoriaproductos);
+            return View(categoriaProductos);
         }
 
         // POST: CategoriaProductos/Delete/5

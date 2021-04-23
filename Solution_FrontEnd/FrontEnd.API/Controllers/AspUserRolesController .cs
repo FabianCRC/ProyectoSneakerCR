@@ -9,14 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 
+
 namespace FrontEnd.API.Controllers
 {
     public class AspNetUserRolesController : Controller
     {
-        string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
 
 
-        // GET: AspUserRoles
+        // GET: AspNetUserRoles
         public async Task<IActionResult> Index()
         {
             List<data.AspNetUserRoles> aux = new List<data.AspNetUserRoles>();
@@ -44,15 +45,15 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var aspUserRoles = GetById(id);
+            var aspNetUserRoles = GetById(id);
 
 
-            if (aspUserRoles == null)
+            if (aspNetUserRoles == null)
             {
                 return NotFound();
             }
 
-            return View(aspUserRoles);
+            return View(aspNetUserRoles);
         }
 
         // GET: AspNetUserRoles/Create
@@ -68,7 +69,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,DateDiscontinued")] data.AspNetUserRoles aspNetUserRoles)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +88,8 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
+            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "Id", aspNetUserRoles.RoleId);
+            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserRoles.UserId);
             return View(aspNetUserRoles);
         }
 
@@ -108,9 +108,8 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
+            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "Id", aspNetUserRoles.RoleId);
+            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserRoles.UserId);
             return View(aspNetUserRoles);
         }
 
@@ -119,7 +118,7 @@ namespace FrontEnd.API.Controllers
         //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,RoleId")] data.AspNetUserRoles aspNetUserRoles)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,DateDiscontinued")] data.AspNetUserRoles aspNetUserRoles)
         {
             if (id != aspNetUserRoles.Id)
             {
@@ -159,8 +158,8 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "AspNetRoles", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "AspNetUsers", aspNetUserRoles.UserId);
+            ViewData["RoleId"] = new SelectList(getAllAspNetRoles(), "Id", "Id", aspNetUserRoles.RoleId);
+            ViewData["UserId"] = new SelectList(getAllAspNetUsers(), "Id", "Id", aspNetUserRoles.UserId);
             return View(aspNetUserRoles);
         }
 
@@ -224,7 +223,6 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
-
         private List<data.AspNetRoles> getAllAspNetRoles()
         {
 
@@ -244,6 +242,7 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
+       
         private List<data.AspNetUsers> getAllAspNetUsers()
         {
 
@@ -263,5 +262,7 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
+
+
     }
 }

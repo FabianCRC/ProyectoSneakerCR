@@ -25,7 +25,7 @@ namespace Solution.API.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/MarcaProductos
+        // GET: api/CategoriaProcuto
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodels.MarcaProductos>>> GetMarcaProductos()
         {
@@ -36,9 +36,9 @@ namespace Solution.API.Controllers
         }
 
 
-        // GET: api/MarcaProductos/5
+        // GET: api/CategoriaProductoController/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<datamodels.MarcaProductos>> GetMarcaProductos(int id)
+        public async Task<ActionResult<datamodels.MarcaProductos>> GetRoles(int id)
         {
             var marcaProductos = new Solution.BS.MarcaProductos(_context).GetOneById(id);
 
@@ -51,7 +51,7 @@ namespace Solution.API.Controllers
             return mapaux;
         }
 
-        // PUT: api/MarcaProductos/5
+        // PUT: api/Roles/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -82,7 +82,7 @@ namespace Solution.API.Controllers
             return NoContent();
         }
 
-        // POST: api/MarcaProductos
+        // POST: api/Clase
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -94,7 +94,7 @@ namespace Solution.API.Controllers
             return CreatedAtAction("GetMarcaProductos", new { id = marcaProductos.IdMarca }, marcaProductos);
         }
 
-        // DELETE: api/MarcaProductos/5
+        // DELETE: api/Roles/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<datamodels.MarcaProductos>> DeleteMarcaProductos(int id)
         {

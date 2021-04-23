@@ -14,7 +14,8 @@ namespace FrontEnd.API.Controllers
 {
     public class AspNetUsersController : Controller
     {
-            string baseurl = "https://localhost:61265/";
+        string baseurl = "http://localhost:61265/";
+
 
         // GET: AspNetUsers
         public async Task<IActionResult> Index()
