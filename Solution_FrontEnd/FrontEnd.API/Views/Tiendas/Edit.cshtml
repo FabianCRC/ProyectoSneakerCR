@@ -1,39 +1,41 @@
 ﻿@model FrontEnd.API.Models.Tiendas
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Actualizar";
 }
+<div class="container">
 
-<h1>Edit</h1>
+    <h1>Actualizar datos de tienda </h1>
 
-<h4>Tiendas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdTienda" />
-            <div class="form-group">
-                <label asp-for="NombreTienda" class="control-label"></label>
-                <input asp-for="NombreTienda" class="form-control" />
-                <span asp-validation-for="NombreTienda" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescripcionTienda" class="control-label"></label>
-                <input asp-for="DescripcionTienda" class="form-control" />
-                <span asp-validation-for="DescripcionTienda" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdTienda" />
+                <div class="form-group">
+                    <label asp-for="NombreTienda" class="control-label"></label>
+                    <input asp-for="NombreTienda" class="form-control" />
+                    <span asp-validation-for="NombreTienda" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescripcionTienda" class="control-label"></label>
+                    <input asp-for="DescripcionTienda" class="form-control" />
+                    <span asp-validation-for="DescripcionTienda" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar Cambios" class="btn btn-secondary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Volver a tiendas</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+</div>

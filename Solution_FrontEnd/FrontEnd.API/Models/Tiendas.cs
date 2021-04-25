@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -20,7 +21,10 @@ namespace FrontEnd.API.Models
         }
 
         public int IdTienda { get; set; }
+
+        [Display(Name = "Nombre de la tienda")]
         public string NombreTienda { get; set; }
+        [Display(Name = "Descripcion de la tienda")]
         public string DescripcionTienda { get; set; }
 
         public virtual ICollection<CorreoTienda> CorreoTienda { get; set; }

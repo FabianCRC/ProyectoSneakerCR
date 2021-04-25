@@ -3,39 +3,43 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container">
 
-<h1>Index</h1>
+    <h1>Lista de Tiendas</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreTienda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionTienda)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreTienda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionTienda)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTienda">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTienda">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTienda">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a class="btn btn-secondary" asp-action="Create">Agregar Tienda</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                   Nombre de la tienda
+                </th>
+                <th>
+                   Descripcion
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreTienda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionTienda)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdTienda">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdTienda">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdTienda">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
