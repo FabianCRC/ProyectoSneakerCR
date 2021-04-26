@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -36,7 +40,7 @@
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="~/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
         </div>
-   
+
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -44,12 +48,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li>
+
             </ul>
 
             <!-- Right navbar links -->
@@ -58,16 +57,7 @@
                 <li class="nav-item">
                     <partial name="_LoginPartial" />
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
+                
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -77,31 +67,25 @@
             <a href="index3.html" class="brand-link">
                 <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">SneakersCR</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>
-                </div>
+    
 
                 <!-- SidebarSearch Form -->
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-        with font-awesome or any other icon font library -->
-             
+                        with font-awesome or any other icon font library -->
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetRoleClaims" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetRoleClaims
                                 </p>
@@ -109,7 +93,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetRoles" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetRoles
                                 </p>
@@ -117,7 +101,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUserClaims" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetUserClaims
                                 </p>
@@ -125,7 +109,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUserLogins" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetUserLogins
                                 </p>
@@ -133,7 +117,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUserRoles" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetUserRoles
                                 </p>
@@ -141,7 +125,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUsers" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetUsers
                                 </p>
@@ -149,7 +133,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUserTokens" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     AspNetUserTokens
                                 </p>
@@ -157,7 +141,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     CategoriaProductos
                                 </p>
@@ -165,7 +149,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="CorreoTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     CorreoTiendas
                                 </p>
@@ -173,7 +157,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="MarcaProductos" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     MarcaProductos
                                 </p>
@@ -181,7 +165,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Productos" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     Productos
                                 </p>
@@ -189,7 +173,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="TelefonoTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     TelefonoTiendas
                                 </p>
@@ -197,7 +181,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Tiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     Tiendas
                                 </p>
@@ -205,7 +189,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="UbicacionTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
                                     UbicacionTiendas
                                 </p>
@@ -213,17 +197,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="UsuarioTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
-                                    UsuarioTiendas
+                                    Usuario Tiendas
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="ValoracionTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-image"></i>
+                                <i class="nav-icon far fa-circle"></i>
                                 <p>
-                                    ValoracionTiendas
+                                    Valoracion Tiendas
                                 </p>
                             </a>
                         </li>

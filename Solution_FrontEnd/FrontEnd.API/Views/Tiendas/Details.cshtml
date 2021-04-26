@@ -6,28 +6,22 @@
 
 <div class="container">
 
-    <h1>Detalles de  @Html.DisplayFor(model => model.NombreTienda)</h1>
+    <h1>Comentarios de  @Html.DisplayFor(model => model.NombreTienda)</h1>
 
-    <div>
-        <h4>Tiendas</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NombreTienda)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NombreTienda)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DescripcionTienda)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DescripcionTienda)
-            </dd>
-        </dl>
+    <div class="col-12">
+        <table class="table">
+            <thead><tr><td>Comentario</td><td>Valoracion</td></tr></thead>
+            <tbody>
+
+                @foreach (var item in ViewData["Valoraciones"] as IEnumerable<FrontEnd.API.Models.ValoracionTienda>)
+                {
+                    @if(@item.IdTienda==Convert.ToInt32(ViewData["idTienda"])) {
+                        <tr><td>@item.Comentario</td><td>@item.Valoracion</td></tr> }
+                    }
+            </tbody>
+        </table>
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.IdTienda">Editar Tienda</a> |
         <a asp-action="Index">Volver a tiendas</a>
     </div>
 

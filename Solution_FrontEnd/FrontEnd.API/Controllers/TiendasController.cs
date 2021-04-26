@@ -53,8 +53,9 @@ namespace FrontEnd.API.Controllers
                 {
                     return NotFound();
                 }
-
-                return View(tiendas);
+            ViewData["Valoraciones"] = new List<data.ValoracionTienda>(getAllValoracionesTienda());
+            ViewData["idTienda"] = id;
+            return View(tiendas);
             }
 
             // GET: Tiendas/Create
@@ -215,5 +216,24 @@ namespace FrontEnd.API.Controllers
                 }
                 return aux;
             }
+        private List<data.ValoracionTienda> getAllValoracionesTienda()
+        {
+
+            List<data.ValoracionTienda> aux = new List<data.ValoracionTienda>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/ValoracionTienda").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.ValoracionTienda>>(auxres);
+                }
+            }
+            return aux;
         }
+    }
 }
