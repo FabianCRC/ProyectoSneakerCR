@@ -27,6 +27,8 @@ namespace FrontEnd.API.Models
         [Display(Name = "Descripcion de la tienda")]
         public string DescripcionTienda { get; set; }
 
+        public string IdUsuario { get; set; }
+
         public virtual ICollection<CorreoTienda> CorreoTienda { get; set; }
         public virtual ICollection<Productos> Productos { get; set; }
         public virtual ICollection<TelefonoTienda> TelefonoTienda { get; set; }

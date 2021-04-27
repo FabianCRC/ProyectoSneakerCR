@@ -1,28 +1,83 @@
 ﻿@model FrontEnd.API.Models.Tiendas
 
 @{
-    ViewData["Title"] = "Detallesz";
+    ViewData["Title"] = "Detalles";
 }
 
 <div class="container">
 
-    <h1>Comentarios de  @Html.DisplayFor(model => model.NombreTienda)</h1>
 
-    <div class="col-12">
-        <table class="table">
-            <thead><tr><td>Comentario</td><td>Valoracion</td></tr></thead>
-            <tbody>
+    <h1>Productos de  @Html.DisplayFor(model => model.NombreTienda)</h1>
 
-                @foreach (var item in ViewData["Valoraciones"] as IEnumerable<FrontEnd.API.Models.ValoracionTienda>)
-                {
-                    @if(@item.IdTienda==Convert.ToInt32(ViewData["idTienda"])) {
-                        <tr><td>@item.Comentario</td><td>@item.Valoracion</td></tr> }
+
+    <div class="card-group">
+        @foreach (var item in ViewData["productos"] as IEnumerable<FrontEnd.API.Models.Productos>)
+        {
+            @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+            {
+
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">@item.NombreProducto</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Valor</h5>
+                        <p class="card-text">@item.DescripcionPproducto</p>
+                    </div>
+                </div>
+
+
+            }
+        }
+    </div>
+     
+
+        <h1>Detalles de  @Html.DisplayFor(model => model.NombreTienda)</h1>
+
+        <div class="col-12">
+            <table class="table">
+                <thead><tr><td>Descripción</td><td>Número</td><td>Correo</td></tr></thead>
+                <tbody>
+                    <tr>
+                        @foreach (var item in ViewData["telefonos"] as IEnumerable<FrontEnd.API.Models.TelefonoTienda>)
+                        {
+                            @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                            {
+                                <td>@Html.DisplayFor(model => model.DescripcionTienda)</td>
+                                <td>@item.Numero</td>
+
+                            }
+                        }
+                        @foreach (var item in ViewData["correos"] as IEnumerable<FrontEnd.API.Models.CorreoTienda>)
+                        {
+                            @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                            {
+                                <td>@item.Correo</td>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1>Comentarios de  @Html.DisplayFor(model => model.NombreTienda)</h1>
+
+        <div class="col-12">
+            <table class="table">
+                <thead><tr><td>Comentario</td><td>Valoracion</td></tr></thead>
+                <tbody>
+
+                    @foreach (var item in ViewData["Valoraciones"] as IEnumerable<FrontEnd.API.Models.ValoracionTienda>)
+                    {
+                        @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                        {
+                            <tr><td>@item.Comentario</td><td>@item.Valoracion</td></tr>
+                        }
                     }
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <a asp-action="Index">Volver a tiendas</a>
-    </div>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="https://localhost:5001/ValoracionTiendas/Create" class="btn btn-secondary">Agregar Comentario</a>
+            <a asp-action="Index">Volver a tiendas</a>
+        </div>
 
-</div>
+    </div>

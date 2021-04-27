@@ -35,8 +35,9 @@ namespace FrontEnd.API.Controllers
                         aux = JsonConvert.DeserializeObject<List<data.Tiendas>>(auxres);
                     }
                 }
+
                 return View(aux);
-            }
+        }
 
             // GET: Tiendas/Details/5
             public async Task<IActionResult> Details(int? id)
@@ -54,6 +55,9 @@ namespace FrontEnd.API.Controllers
                     return NotFound();
                 }
             ViewData["Valoraciones"] = new List<data.ValoracionTienda>(getAllValoracionesTienda());
+            ViewData["telefonos"] = new List<data.TelefonoTienda>(getAllTelefonoTienda());
+            ViewData["correos"] = new List<data.CorreoTienda>(getAllCorreoTienda());
+            ViewData["productos"] = new List<data.Productos>(getAllProductos());
             ViewData["idTienda"] = id;
             return View(tiendas);
             }
@@ -61,7 +65,8 @@ namespace FrontEnd.API.Controllers
             // GET: Tiendas/Create
             public IActionResult Create()
             {
-                return View();
+
+            return View();
             }
 
             // POST: Tiendas/Create
@@ -71,24 +76,33 @@ namespace FrontEnd.API.Controllers
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create([Bind("IdTienda,NombreTienda,DescripcionTienda")] data.Tiendas tiendas)
             {
-                if (ModelState.IsValid)
-                {
-                    using (var cl = new HttpClient())
-                    {
-                        cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(tiendas);
-                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-                        var byteContent = new ByteArrayContent(buffer);
-                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PostAsync("api/Tiendas", byteContent).Result;
 
+
+            if (ModelState.IsValid)
+                {
+
+                using (var cl = new HttpClient())
+                    {
+
+                    if (tiendas.IdTienda != null) { 
+
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(tiendas);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Tiendas", byteContent).Result;
                         if (postTask.IsSuccessStatusCode)
                         {
                             return RedirectToAction(nameof(Index));
                         }
                     }
-                }
-                return View(tiendas);
+
+                    }            
+
+            }
+
+            return View(tiendas);
             }
 
             // GET: Tiendas/Edit/5
@@ -235,5 +249,67 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
+
+        private List<data.TelefonoTienda> getAllTelefonoTienda()
+        {
+
+            List<data.TelefonoTienda> aux = new List<data.TelefonoTienda>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/TelefonoTienda").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.TelefonoTienda>>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        private List<data.CorreoTienda> getAllCorreoTienda()
+        {
+
+            List<data.CorreoTienda> aux = new List<data.CorreoTienda>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/CorreoTienda").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.CorreoTienda>>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        private List<data.Productos> getAllProductos()
+        {
+
+            List<data.Productos> aux = new List<data.Productos>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Productos").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Productos>>(auxres);
+                }
+            }
+            return aux;
+        }
+
+
     }
 }
