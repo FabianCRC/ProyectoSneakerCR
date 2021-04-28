@@ -7,19 +7,17 @@
 <div class="container">
 
 
-    <h1>Index</h1>
+    <h1>Lista de usuarios de las tiendas</h1>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdTiendaNavigation.NombreTienda)
+                    @Html.DisplayNameFor(model => model.IdUsuario)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdUsuarioNavigation.UserName)
+                    @Html.DisplayNameFor(model => model.IdTienda)
                 </th>
                 <th></th>
             </tr>
@@ -29,15 +27,14 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdTiendaNavigation.NombreTienda)
+                        @Html.DisplayFor(modelItem => item.IdUsuario)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
+                        @Html.DisplayFor(modelItem => item.IdTienda)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdUsuarioTienda">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdUsuarioTienda">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdUsuarioTienda">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.IdUsuarioTienda">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdUsuarioTienda">Eliminar</a>
                     </td>
                 </tr>
             }

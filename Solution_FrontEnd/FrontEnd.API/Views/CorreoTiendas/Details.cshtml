@@ -5,10 +5,10 @@
 }
 <div class="container">
 
-    <h1>Details</h1>
+    <h1>Detalles</h1>
 
     <div>
-        <h4>CorreoTienda</h4>
+        <h4>Correo Tienda</h4>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
@@ -24,16 +24,16 @@
                 @Html.DisplayFor(model => model.Descripcion)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdTiendaNavigation)
+                @Html.DisplayNameFor(model => model.IdTienda)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdTiendaNavigation.DescripcionTienda)
+                @Html.DisplayFor(model => model.IdTienda)
             </dd>
         </dl>
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.IdCorreo">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.IdCorreo">Editar</a> |
+        <a asp-action="Index">Volver a lista de los correos de las tiendas</a>
     </div>
 
 </div>

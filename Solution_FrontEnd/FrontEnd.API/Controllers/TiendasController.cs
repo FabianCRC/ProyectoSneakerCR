@@ -58,6 +58,7 @@ namespace FrontEnd.API.Controllers
             ViewData["telefonos"] = new List<data.TelefonoTienda>(getAllTelefonoTienda());
             ViewData["correos"] = new List<data.CorreoTienda>(getAllCorreoTienda());
             ViewData["productos"] = new List<data.Productos>(getAllProductos());
+            ViewData["ubicaiones"] = new List<data.UbicacionTienda>(getAllUbicacionTienda());
             ViewData["idTienda"] = id;
             return View(tiendas);
             }
@@ -305,6 +306,26 @@ namespace FrontEnd.API.Controllers
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
                     aux = JsonConvert.DeserializeObject<List<data.Productos>>(auxres);
+                }
+            }
+            return aux;
+        }
+        
+                    private List<data.UbicacionTienda> getAllUbicacionTienda()
+        {
+
+            List<data.UbicacionTienda> aux = new List<data.UbicacionTienda>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/UbicacionTienda").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.UbicacionTienda>>(auxres);
                 }
             }
             return aux;

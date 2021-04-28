@@ -9,7 +9,7 @@
     <h1>Index</h1>
 
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create" class="btn btn-secondary">Crear nuevo correo de tienda</a>
     </p>
     <table class="table">
         <thead>
@@ -21,7 +21,7 @@
                     @Html.DisplayNameFor(model => model.Descripcion)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdTiendaNavigation)
+                    @Html.DisplayNameFor(model => model.IdTienda)
                 </th>
                 <th></th>
             </tr>
@@ -37,12 +37,11 @@
                         @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdTiendaNavigation.DescripcionTienda)
+                        @Html.DisplayFor(modelItem => item.IdTienda)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdCorreo">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdCorreo">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdCorreo">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.IdCorreo">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdCorreo">Eliminar</a>
                     </td>
                 </tr>
             }

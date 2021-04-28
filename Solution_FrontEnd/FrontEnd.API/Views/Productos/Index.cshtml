@@ -6,10 +6,10 @@
 
 <div class="container">
 
-    <h1>Index</h1>
+    <h1>Productos</h1>
 
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create" class="btn btn-secondary">Agregar Producto</a>
     </p>
     <table class="table">
         <thead>
@@ -21,7 +21,7 @@
                     @Html.DisplayNameFor(model => model.DescripcionPproducto)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Anno)
+                    Año
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Valor)
@@ -64,9 +64,9 @@
                         @Html.DisplayFor(modelItem => item.Tiendas.NombreTienda)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdProducto">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdProducto">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdProducto">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.IdProducto">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdProducto">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdProducto">Eliminar</a>
                     </td>
                 </tr>
             }

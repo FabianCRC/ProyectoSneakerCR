@@ -34,25 +34,42 @@
 
         <div class="col-12">
             <table class="table">
-                <thead><tr><td>Descripción</td><td>Número</td><td>Correo</td></tr></thead>
+                <thead><tr><td>Descripción</td><td>Ubicación</td><td>Número</td><td>Correo</td></tr></thead>
                 <tbody>
                     <tr>
-                        @foreach (var item in ViewData["telefonos"] as IEnumerable<FrontEnd.API.Models.TelefonoTienda>)
-                        {
-                            @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                        <td>@Html.DisplayFor(model => model.DescripcionTienda)</td>
+                        <td>
+                            @foreach (var item in ViewData["ubicaiones"] as IEnumerable<FrontEnd.API.Models.UbicacionTienda>)
                             {
-                                <td>@Html.DisplayFor(model => model.DescripcionTienda)</td>
-                                <td>@item.Numero</td>
+                                @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                                {
+                                    @item.Provincia
 
+
+                                }
                             }
-                        }
-                        @foreach (var item in ViewData["correos"] as IEnumerable<FrontEnd.API.Models.CorreoTienda>)
-                        {
-                            @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                        </td>
+                        <td>
+                            @foreach (var item in ViewData["telefonos"] as IEnumerable<FrontEnd.API.Models.TelefonoTienda>)
                             {
-                                <td>@item.Correo</td>
+                                @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                                {
+                                    @item.Numero
+
+
+                                }
                             }
-                        }
+                        </td>
+                        <td>
+                            @foreach (var item in ViewData["correos"] as IEnumerable<FrontEnd.API.Models.CorreoTienda>)
+                            {
+                                @if (@item.IdTienda == Convert.ToInt32(ViewData["idTienda"]))
+                                {
+
+                                    @item.Correo <br />
+                                }
+                            }
+                        </td>
                     </tr>
                 </tbody>
             </table>

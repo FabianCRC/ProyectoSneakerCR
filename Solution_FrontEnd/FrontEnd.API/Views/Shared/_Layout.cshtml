@@ -83,8 +83,15 @@
                     {
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-
+    with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Tiendas" asp-action="Index">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>
+                                    Tiendas
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetRoleClaims" asp-action="Index">
                                 <i class="nav-icon far fa-circle"></i>
@@ -129,7 +136,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="AspNetUsers" asp-action="Index">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>
-                                    AspNetUsers
+                                    Usuarios del Sistema
                                 </p>
                             </a>
                         </li>
@@ -141,78 +148,70 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    CategoriaProductos
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="CorreoTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    CorreoTiendas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="MarcaProductos" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    MarcaProductos
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Productos" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    Productos
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="TelefonoTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    TelefonoTiendas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Tiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    Tiendas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="UbicacionTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    UbicacionTiendas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="UsuarioTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    Usuario Tiendas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="ValoracionTiendas" asp-action="Index">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    Valoracion Tiendas
-                                </p>
-                            </a>
-                        </li>
+                        @*<li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    CategoriaProductos
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="CorreoTiendas" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    CorreoTiendas
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="MarcaProductos" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    MarcaProductos
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Productos" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    Productos
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="TelefonoTiendas" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    TelefonoTiendas
+                </p>
+            </a>
+        </li>*@
+                        @*<li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="UbicacionTiendas" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    UbicacionTiendas
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="UsuarioTiendas" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    Usuario Tiendas
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="ValoracionTiendas" asp-action="Index">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                    Valoracion Tiendas
+                </p>
+            </a>
+        </li>*@
                     </ul>
                     }
                 </nav>
@@ -247,15 +246,10 @@
             @RenderBody()
             <!-- /Main content -->
             <!-- /.content -->
+            <br/>
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
-            </div>
-        </footer>
+
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
